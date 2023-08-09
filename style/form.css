@@ -1,0 +1,29 @@
+form {
+	position: relative;
+	margin: 50vh auto;
+	transform: translateY(-50%);
+	display: grid;
+	place-items: center;
+	gap: 0.25rem;
+	width: clamp(100px, 50%, 300px);
+	
+	display: none;
+}
+
+form label {
+	font-size: 1rem;
+	justify-self: start;
+	
+}
+
+form [type='text'],
+	 [type='num'] {
+	padding: 0.25rem 0.25rem;
+	width: 100%;
+}
+
+
+form button {
+	padding: 0.25rem 2rem;
+	margin-top: 1rem;
+}

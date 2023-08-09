@@ -8,7 +8,25 @@
   </head>
   <body>
     <div class="wrapper">
-		
+		<form action="" method="post">
+				
+			<label for='title'>Title: </label>
+			<input type="text" name="title" id='title'  />
+			
+			<label for='author'>Author: </label>
+			<input type="text" name="author" id='author'  />
+			
+			<label for='current'>Current Page: </label>
+			<input type="num" name="current" id='current'  />
+			
+			<label for='pages'>Pages: </label>
+			<input type="num" name="pages" id='pages'  />
+			
+			<button id="add-book" type="submit">Add</button>
+		</form>
+		<div class="library">
+			
+		</div>
     </div>
     <script type="module" src="src/main.js"></script>
   </body>
