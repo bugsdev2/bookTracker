@@ -5,25 +5,33 @@
     <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Book Tracker</title>
+    
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
   </head>
   <body>
     <div class="wrapper">
-		<form action="" method="post">
+		<div class='form-wrapper'>
+			<form action="" method="post">
+				<button type="button" class="close">
+					<span class="material-symbols-rounded">cancel</span>
+				</button>
 				
-			<label for='title'>Title: </label>
-			<input type="text" name="title" id='title'  />
-			
-			<label for='author'>Author: </label>
-			<input type="text" name="author" id='author'  />
-			
-			<label for='current'>Current Page: </label>
-			<input type="num" name="current" id='current'  />
-			
-			<label for='pages'>Pages: </label>
-			<input type="num" name="pages" id='pages'  />
-			
-			<button id="add-book" type="submit">Add</button>
-		</form>
+				<label for='title'>Title: </label>
+				<input type="text" name="title" id='title'  />
+				
+				<label for='author'>Author: </label>
+				<input type="text" name="author" id='author'  />
+				
+				<label for='current'>Current Page: </label>
+				<input type="num" name="current" id='current'  />
+				
+				<label for='pages'>Pages: </label>
+				<input type="num" name="pages" id='pages'  />
+				
+				<button id="add-book-btn" type="submit">Add</button>
+			</form>
+		</div>
 		<div class="bg">
 			<p> On an exceptionally hot evening early in July a young man came out of the garret in which he lodged in S. Place and walked slowly, as though in hesitation, towards K. bridge.
 
@@ -133,12 +141,77 @@
 		</div>
 		</div>
 		<div class="library">
-			<div class="book-container">
-				<p>'The Hobbit'</p>
-				<p>JRR Tolkien</p>
-				<p>325/436 pages</p>
-				<p>35% complete</p>
+			<div class="head-bar">
+				<h2>book tracker</h2>
+				<button class='addbtn'>
+					<p>add book</p>
+					<span class="material-symbols-outlined">add_circle</span>
+				</button>
 			</div>
+<!--
+			<div class="book-container done">
+				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>
+				<div class="bookinfo">
+					<p class="title">'The Hobbit'</p>
+					<p class="author">JRR Tolkien</p>
+				</div>
+				<div class="page-status">
+					<p>325/436</p>
+					<p>100% complete</p>
+				</div>
+				<progress value=100 max=100></progress>
+			</div>
+			<div class="book-container">
+				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>
+				<div class="bookinfo">
+					<p class="title">'The Sellout'</p>
+					<p class="author">Paul Beatty</p>
+				</div>
+				<div class="page-status">
+					<p>325/436</p>
+					<p>35% complete</p>
+				</div>
+				<progress value=35 max=100></progress>
+			</div>
+			<div class="book-container">
+				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>
+				<div class="bookinfo">
+					<p class="title">'One Hundred Years of Solitude'</p>
+					<p class="author">Gabriel Garcia Marquez</p>
+				</div>
+				<div class="page-status">
+					<p>325/436</p>
+					<p>35% complete</p>
+				</div>
+				<progress value=35 max=100></progress>
+			</div>
+			<div class="book-container">
+				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>
+				<div class="bookinfo">
+					<p class="title">'Crime and Punishment'</p>
+					<p class="author">Fyodor Dostoyevsky</p>
+				</div>
+				<div class="page-status">
+					<p>325/436</p>
+					<p>35% complete</p>
+				</div>
+				<progress value=35 max=100></progress>
+			</div>
+			<div class="book-container">
+				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>
+				<div class="bookinfo">
+					<p class="title">'State and the Revolution'</p>
+					<p class="author">Lenin</p>
+				</div>
+				<div class="page-status">
+					<p>325/436</p>
+					<p>35% complete</p>
+				</div>
+				<progress value=35 max=100></progress>
+			</div>
+-->
+			
+			
 		</div>
     <script type="module" src="src/main.js"></script>
   </body>

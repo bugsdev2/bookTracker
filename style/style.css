@@ -11,16 +11,19 @@ body {
 	height: 100vh;
 	width: 100vw;
 	overflow: hidden;
+	font-family: sans;
 }
 
 .bg {
 	position: absolute;
 	line-height: 0.9rem;
-	top: -10px;
-	color: grey;
+	top: -20px;
+	color: #2B2B2B;
+	background: black;
 	text-align: justify;
 	z-index: -10;
 	font-size: 30px;
+	user-select: none;
 }
 
 
