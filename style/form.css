@@ -11,19 +11,19 @@
 	display: none;
 }
 
-form {
+.add-book {
 	display: flex;
 	position: relative;
 	flex-direction: column;
 	gap: 0.5rem;
-	width: clamp(100px, 50%, 400px);
+	width: clamp(200px, 50%, 400px);
 	color: white;
 	padding: 2rem;
 	border: 2px solid white;
 	border-radius: 20px;
 }
 
-form .close {
+.add-book .close {
 	position: absolute;
 	right: -10px;
 	top: -10px;
@@ -39,28 +39,34 @@ form .close {
 	font-variation-settings: 'FILL' 1;
 }
 
-form .close:hover {
+.add-book .close:hover {
 	background: #D10000 ; /*#AF0000;*/
 }
 
-form .close:active {
+.add-book .close:active {
 	transform: translateY(-1px);
 }
 
-form label {
+.add-book label {
 	font-size: 1rem;
 	justify-self: start;
 	
 }
 
-form [type='text'],
-	 [type='num'] {
+.add-book [type='text'], 
+.add-book [type='num'] {
 	padding: 0.25rem 0.25rem;
 	width: 100%;
 }
 
+.add-book .error::after {
+	content: '*Current Page should not be more than total pages';
+	color: red;
+	font-size: 0.7rem;
+}
 
-form #add-book-btn {
+
+.add-book #add-book-btn {
 	padding: 0.25rem 2rem;
 	margin-top: 1rem;
 	align-self: center;

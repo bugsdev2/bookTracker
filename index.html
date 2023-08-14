@@ -12,22 +12,28 @@
   <body>
     <div class="wrapper">
 		<div class='form-wrapper'>
-			<form action="" method="post">
+			<form action="" method="post" class="add-book">
 				<button type="button" class="close">
 					<span class="material-symbols-rounded">cancel</span>
 				</button>
+				<div class='title'>
+					<label for='title'>Title: </label>
+					<input type="text" name="title" id='title'  />
+				</div>
+				<div class='author'>
+					<label for='author'>Author: </label>
+					<input type="text" name="author" id='author'  />
+				</div>
 				
-				<label for='title'>Title: </label>
-				<input type="text" name="title" id='title'  />
+				<div class='current'>
+					<label for='current'>Current Page: </label>
+					<input type="num" name="current" id='current'  />
+				</div>
 				
-				<label for='author'>Author: </label>
-				<input type="text" name="author" id='author'  />
-				
-				<label for='current'>Current Page: </label>
-				<input type="num" name="current" id='current'  />
-				
-				<label for='pages'>Pages: </label>
-				<input type="num" name="pages" id='pages'  />
+				<div class='pages'>
+					<label for='pages'>Pages: </label>
+					<input type="num" name="pages" id='pages'  />
+				</div>
 				
 				<button id="add-book-btn" type="submit">Add</button>
 			</form>
@@ -148,6 +154,10 @@
 					<span class="material-symbols-outlined">add_circle</span>
 				</button>
 			</div>
+			<div class='books-wrapper'>
+			
+			</div>
+			
 <!--
 			<div class="book-container done">
 				<button type="button" class="close"><span class="material-symbols-rounded">cancel</span></button>

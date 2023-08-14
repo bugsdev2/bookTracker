@@ -3,15 +3,18 @@ export const library = () => {
 	// library properties
 	const library = document.querySelector('.library');
 	const addBookBtn = document.querySelector('.addbtn');
-	const deleteBtn = document.querySelector('.book-container button');
+	const booksWrapper = document.querySelector('.books-wrapper');
+	
 	
 	// form properties
 	const formWrapper = document.querySelector('.form-wrapper');
 	const form = document.querySelector('form');
 	const formCloseBtn = document.querySelector('form .close');
-	const formInput = document.querySelector('form input');
+	const formInputTitle = document.querySelector('form #title');
+	const formInputCurrentPageDiv = document.querySelector('form .current');
+	const formInputPagesDiv = document.querySelector('form .pages');
 	
-	// creating library arrayto store books
+	// creating library array to store books
 	let myLibrary = [];
 
 	// book constructor
@@ -41,9 +44,11 @@ export const library = () => {
 							formDataObj.pages
 		);
 		if (newBook.title == '' || newBook.author == '' || newBook.currentPage == '' || newBook.pages == '') return;
+		if (newBook.currentPage > newBook.pages) return;
 		newBook['status'] = newBook.readStatus();
 		myLibrary.push(newBook);
-		updateLibrary(myLibrary);
+		updateIndex(myLibrary);
+		updateLibrary(newBook);
 	};
 	
 	// function to convert to percentage
@@ -51,48 +56,56 @@ export const library = () => {
 		return Math.round((currentPage/pages)*100);
 	};
 	
-	// function to update library display
-	function updateLibrary(myLibrary) {
+	// function to update LIbrary Index
+	function updateIndex(myLibrary) {
 		myLibrary.forEach(book => {
-			const bookContainer = document.createElement('div');
-				bookContainer.classList.add('book-container');
-				library.appendChild(bookContainer);
-			const closeBtn = document.createElement('button');
-				closeBtn.classList.add('close');
-				closeBtn.innerHTML = '<span class="material-symbols-rounded">cancel</span>';
-				bookContainer.appendChild(closeBtn);
-			const bookInfo = document.createElement('div');
-				bookInfo.classList.add('bookinfo');
-				bookContainer.appendChild(bookInfo);
-			const bookTitle = document.createElement('p');
-				bookTitle.classList.add('title');
-				bookTitle.textContent = `'${book.title}'`;
-				bookInfo.appendChild(bookTitle);
-			const bookAuthor = document.createElement('p');
-				bookAuthor.classList.add('author');
-				bookAuthor.textContent = book.author;
-				bookInfo.appendChild(bookAuthor);
-			const pageStatus = document.createElement('div');
-				pageStatus.classList.add('page-status');
-				bookContainer.appendChild(pageStatus);
-			const pages = document.createElement('p');
-				pages.textContent = `${book.currentPage} / ${book.pages}`;
-				pageStatus.appendChild(pages);
-			const percent = document.createElement('p');
-				let percentage = convertToPercent(book.currentPage, book.pages);
-				percent.textContent = `${percentage}% complete`;
-				pageStatus.appendChild(percent);
-			const progressBar = document.createElement('progress');
-				progressBar.setAttribute('value', percentage);
-				progressBar.setAttribute('max', '100');
-				bookContainer.appendChild(progressBar);
+			book['index'] = myLibrary.indexOf(book);
 		});
+	};
+	
+	// function to update library display
+	function updateLibrary(book) {
+		const bookContainer = document.createElement('div');
+			bookContainer.classList.add('book-container');
+			booksWrapper.appendChild(bookContainer);
+		const closeBtn = document.createElement('button');
+			closeBtn.classList.add('close');
+			closeBtn.innerHTML = '<span class="material-symbols-rounded">cancel</span>';
+			bookContainer.appendChild(closeBtn);
+		const bookInfo = document.createElement('div');
+			bookInfo.classList.add('bookinfo');
+			bookContainer.appendChild(bookInfo);
+		const bookTitle = document.createElement('p');
+			bookTitle.classList.add('title');
+			bookTitle.textContent = `'${book.title}'`;
+			bookInfo.appendChild(bookTitle);
+		const bookAuthor = document.createElement('p');
+			bookAuthor.classList.add('author');
+			bookAuthor.textContent = book.author;
+			bookInfo.appendChild(bookAuthor);
+		const pageStatus = document.createElement('div');
+			pageStatus.classList.add('page-status');
+			bookContainer.appendChild(pageStatus);
+		const pages = document.createElement('p');
+			pages.classList.add('pages');
+			pages.textContent = `${book.currentPage} / ${book.pages}`;
+			pageStatus.appendChild(pages);
+		const percent = document.createElement('p');
+			let percentage = convertToPercent(book.currentPage, book.pages);
+			percent.textContent = `${percentage}% complete`;
+			pageStatus.appendChild(percent);
+		const progressBar = document.createElement('progress');
+			progressBar.setAttribute('value', percentage);
+			progressBar.setAttribute('max', '100');
+			bookContainer.appendChild(progressBar);
+		bookContainer.dataset.index = book.index;
 	};
 	
 	// getting form data from the form
 	function addBookToLibrary(e) {
 		e.preventDefault();
 		const formData = new FormData(e.target);
+		formWrapper.style.setProperty('display', 'none');
 		pushToLibrary(formData);
 	};
 	
@@ -103,7 +116,7 @@ export const library = () => {
 	
 	// function for closing the form
 	function closeForm() {
-		if (formInput.value == '' ) {
+		if (formInputTitle.value == '' ) {
 			formWrapper.style.setProperty('display', 'none');
 		} else {
 			if (confirm('Do you want to close the window?')) {
@@ -114,16 +127,60 @@ export const library = () => {
 	
 	// function for deleting books
 	function deleteBook(e) {
-		console.log(e.target);
+		const deleteBtns = document.querySelectorAll('.book-container .close');
+		deleteBtns.forEach(button => {
+			if (e.target == button.firstElementChild) {
+				if (confirm('This will delete the entry? Do you want to continue?')) {
+					let container = e.target.parentElement.parentElement;
+					myLibrary.splice(container.getAttribute('data-index'), 1);
+					updateIndex(myLibrary);
+					clearLibrary();
+					myLibrary.forEach(book => {
+						updateLibrary(book);
+					});
+				}
+				
+			};
+		});
 	};
 	
-	// adding predefined book objects
-	const book1 = new Book('Persepolis', 'Marjane Satrapi', 240, 343, 'completed');
-	const book2 = new Book('The Sellout', 'Paul Beatty', 289, 289, 'completed');
-	const book3 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 132, 336, 'reading');
-	const book4 = new Book('Salvation of a Saint', 'Keigo Higashino', 204, 377, 'reading');
-	myLibrary.push(book1, book2, book3, book4);
-	updateLibrary(myLibrary);
+	// function to clear library screen
+	function clearLibrary() {
+		booksWrapper.textContent = '';
+	};
+	
+	// function to check if current page goes more than the number of pages
+	function checkPages(e) {
+		if (formInputPagesDiv.children[1].value == '' || form) return;
+		let currentPage = parseInt(formInputCurrentPageDiv.children[1].value);
+		let pages = parseInt(formInputPagesDiv.children[1].value);
+		if ( currentPage > pages ) {
+			formInputCurrentPageDiv.classList.add('error');
+		} else {
+			formInputCurrentPageDiv.classList.remove('error');
+		}
+	};
+	
+	// function to change current page and number of pages
+	function changePages(e) {
+		if (e.target.classList[0] == 'pages') {
+			const container = e.target.parentElement.parentElement;
+			const miniForm = document.createElement('div');
+				miniForm.classList.add('mini-form');
+				container.appendChild(miniForm);
+			const form = document.createElement('form');
+				miniForm.appendChild(form);
+			const div1 = document.createElement('div');
+				form.appendChild(div1);
+			const label1 = document.createElement('label');
+				label1.setAttribute('for', 'current-page');
+				label1.textContent = 'Current: ';
+				div1.appendChild(label1);
+			const input1 = document.createElement('input');
+				
+				
+		}
+	};
 	
 	// event listener for adding book to library
 	form.addEventListener('submit', addBookToLibrary);
@@ -135,7 +192,28 @@ export const library = () => {
 	formCloseBtn.addEventListener('click', closeForm);
 
 	// event listener for deleting the book container
-	deleteBtn.addEventListener('click', deleteBook);
+	library.addEventListener('click', deleteBook);
+	
+	// event listener to check when the current page goes more than the number of pages
+	formInputCurrentPageDiv.addEventListener('input', checkPages);
+	formInputPagesDiv.addEventListener('input', checkPages);
+	
+	// function to edit current page and number of pages
+	booksWrapper.addEventListener('click', changePages);
+	
+	
+	// adding predefined book objects
+	const book1 = new Book('Persepolis', 'Marjane Satrapi', 240, 343, 'completed');
+	const book2 = new Book('The Sellout', 'Paul Beatty', 289, 289, 'completed');
+	const book3 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 132, 336, 'reading');
+	const book4 = new Book('Salvation of a Saint', 'Keigo Higashino', 204, 377, 'reading');
+	myLibrary.push(book1, book2, book3, book4);
+	updateIndex(myLibrary);
+	updateLibrary(book1);
+	updateLibrary(book2);
+	updateLibrary(book3);
+	updateLibrary(book4);
+	
 	
 }
 
