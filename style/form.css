@@ -16,7 +16,7 @@
 	position: relative;
 	flex-direction: column;
 	gap: 0.5rem;
-	width: clamp(200px, 50%, 400px);
+	width: clamp(200px, 80%, 400px);
 	color: white;
 	padding: 2rem;
 	border: 2px solid white;
