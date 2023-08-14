@@ -240,7 +240,7 @@ export const library = () => {
 	// adding predefined book objects
 	const book1 = new Book('Persepolis', 'Marjane Satrapi', 240, 343, 'completed');
 	const book2 = new Book('The Sellout', 'Paul Beatty', 289, 289, 'completed');
-	const book3 = new Book('One Hundred Years of Solitude', 'Gabriel Garcia Marquez', 132, 336, 'reading');
+	const book3 = new Book('Things Fall Apart', 'Chinua Achebe', 132, 187, 'reading');
 	const book4 = new Book('Salvation of a Saint', 'Keigo Higashino', 204, 377, 'reading');
 	myLibrary.push(book1, book2, book3, book4);
 	updateIndex(myLibrary);
