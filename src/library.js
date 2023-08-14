@@ -151,7 +151,7 @@ export const library = () => {
 	
 	// function to check if current page goes more than the number of pages
 	function checkPages(e) {
-		if (formInputPagesDiv.children[1].value == '' || form) return;
+		if (formInputPagesDiv.children[1].value == 0) return;
 		let currentPage = parseInt(formInputCurrentPageDiv.children[1].value);
 		let pages = parseInt(formInputPagesDiv.children[1].value);
 		if ( currentPage > pages ) {
@@ -165,6 +165,8 @@ export const library = () => {
 	function changePages(e) {
 		if (e.target.classList[0] == 'pages') {
 			const container = e.target.parentElement.parentElement;
+			const index = container.getAttribute('data-index');
+			
 			const miniForm = document.createElement('div');
 				miniForm.classList.add('mini-form');
 				container.appendChild(miniForm);
@@ -177,8 +179,41 @@ export const library = () => {
 				label1.textContent = 'Current: ';
 				div1.appendChild(label1);
 			const input1 = document.createElement('input');
-				
-				
+				input1.setAttribute('type', 'number');
+				input1.setAttribute('id', 'current-page');
+				input1.setAttribute('name', 'current-page');
+				input1.setAttribute('min', '0');
+				input1.setAttribute('value', myLibrary[index].currentPage);
+				input1.setAttribute('max', myLibrary[index].pages);
+				div1.appendChild(input1);
+			const div2 = document.createElement('div');
+				form.appendChild(div2);
+			const label2 = document.createElement('label');
+				label2.setAttribute('for', 'pages');
+				label2.textContent = 'Pages: ';
+				div2.appendChild(label2);
+			const input2 = document.createElement('input');
+				input2.setAttribute('type', 'number');
+				input2.setAttribute('id', 'pages');
+				input2.setAttribute('name', 'pages');
+				input2.setAttribute('min', '0');
+				input2.setAttribute('value', myLibrary[index].pages);
+				div2.appendChild(input2);
+			const button = document.createElement('button');
+				button.setAttribute('type', 'submit');
+				button.textContent = 'Update';
+				form.appendChild(button);
+			form.addEventListener('submit', function updatePages(e) {
+				e.preventDefault();
+				const formData = new FormData(e.target);
+				const formDataObj = Object.fromEntries(formData);
+				myLibrary[index].currentPage = parseInt(formDataObj['current-page']);
+				myLibrary[index].pages = parseInt(formDataObj['pages']);
+				clearLibrary();
+				myLibrary.forEach(book => {
+					updateLibrary(book);
+				});
+			});
 		}
 	};
 	

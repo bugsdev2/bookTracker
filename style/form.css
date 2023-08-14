@@ -54,7 +54,7 @@
 }
 
 .add-book [type='text'], 
-.add-book [type='num'] {
+.add-book [type='number'] {
 	padding: 0.25rem 0.25rem;
 	width: 100%;
 }
