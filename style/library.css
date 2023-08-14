@@ -126,8 +126,10 @@
 }
 
 progress::-moz-progress-bar,
-progress::-webkit-progress-value { 
+progress::-webkit-progress-value,
+progress { 
 	background: #949494;
+	color: #949494;
 }
 
 .book-container .mini-form {
