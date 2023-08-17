@@ -61,7 +61,8 @@
 }
 
 .book-container.done {
-	background: #003B00;
+	opacity: 0.9;
+	background: #1A1A1A;
 }
 
 .book-container .close {

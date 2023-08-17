@@ -98,7 +98,19 @@ export const library = () => {
 			progressBar.setAttribute('value', percentage);
 			progressBar.setAttribute('max', '100');
 			bookContainer.appendChild(progressBar);
-		bookContainer.dataset.index = book.index;
+			bookContainer.dataset.index = book.index;
+		
+		// code to change appearance of finished books
+		if (book.currentPage == book.pages) {
+			bookContainer.classList.add('done');
+			percent.textContent = `Completed`;
+			
+		} else {
+			bookContainer.classList.remove('done');
+			percent.textContent = `${percentage}% complete`;
+		}
+		
+		
 	};
 	
 	// getting form data from the form
