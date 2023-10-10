@@ -4,6 +4,7 @@ export const library = () => {
 	const library = document.querySelector('.library');
 	const addBookBtn = document.querySelector('.addbtn');
 	const booksWrapper = document.querySelector('.books-wrapper');
+	const root = document.documentElement;
 	
 	
 	// form properties
@@ -61,6 +62,7 @@ export const library = () => {
 		myLibrary.forEach(book => {
 			book['index'] = myLibrary.indexOf(book);
 		});
+		console.log(myLibrary);
 	};
 	
 	// function to update library display
@@ -86,18 +88,39 @@ export const library = () => {
 		const pageStatus = document.createElement('div');
 			pageStatus.classList.add('page-status');
 			bookContainer.appendChild(pageStatus);
-		const pages = document.createElement('p');
+		//~ const pages = document.createElement('p');
+			//~ pages.classList.add('pages');
+			//~ pages.textContent = `${book.currentPage} / ${book.pages}`;
+			//~ pageStatus.appendChild(pages);
+		//~ const percent = document.createElement('p');
+			//~ let percentage = convertToPercent(book.currentPage, book.pages);
+			//~ percent.textContent = `${percentage}% complete`;
+			//~ pageStatus.appendChild(percent);
+			
+		//~ const progressBar = document.createElement('progress');
+			//~ progressBar.setAttribute('value', percentage);
+			//~ progressBar.setAttribute('max', '100');
+			//~ bookContainer.appendChild(progressBar);
+			//~ bookContainer.dataset.index = book.index;
+			
+		// trying new method of a round progress bar
+		const progressBarOuter = document.createElement('div');
+			progressBarOuter.classList.add('outer');
+			const progressBarInner = document.createElement('div');
+			progressBarInner.classList.add('inner');
+			progressBarOuter.appendChild(progressBarInner);
+			const innermostDiv = document.createElement('div');
+			const pages = document.createElement('p');
 			pages.classList.add('pages');
 			pages.textContent = `${book.currentPage} / ${book.pages}`;
-			pageStatus.appendChild(pages);
+			innermostDiv.appendChild(pages);
 		const percent = document.createElement('p');
 			let percentage = convertToPercent(book.currentPage, book.pages);
-			percent.textContent = `${percentage}% complete`;
-			pageStatus.appendChild(percent);
-		const progressBar = document.createElement('progress');
-			progressBar.setAttribute('value', percentage);
-			progressBar.setAttribute('max', '100');
-			bookContainer.appendChild(progressBar);
+			progressBarOuter.style.setProperty('background', `conic-gradient(teal ${percentage}%, 0, grey)`);
+			percent.textContent = `${percentage}%`;
+			innermostDiv.appendChild(percent);
+			progressBarInner.appendChild(innermostDiv);
+			bookContainer.appendChild(progressBarOuter);
 			bookContainer.dataset.index = book.index;
 		
 		// code to change appearance of finished books
@@ -107,7 +130,7 @@ export const library = () => {
 			
 		} else {
 			bookContainer.classList.remove('done');
-			percent.textContent = `${percentage}% complete`;
+			percent.textContent = `${percentage}%`;
 		}
 		
 		
@@ -176,9 +199,9 @@ export const library = () => {
 	// function to change current page and number of pages
 	function changePages(e) {
 		if (e.target.classList[0] == 'pages') {
-			const container = e.target.parentElement.parentElement;
+			const container = e.target.parentElement.parentElement.parentElement.parentElement;
 			const index = container.getAttribute('data-index');
-			
+			console.log(container, index);
 			const miniForm = document.createElement('div');
 				miniForm.classList.add('mini-form');
 				container.appendChild(miniForm);
