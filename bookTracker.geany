@@ -29,8 +29,8 @@ long_line_column=72
 [files]
 current_page=2
 FILE_NAME_0=20447;HTML;0;EUTF-8;1;1;0;%2Fhome%2Fbugs%2FProjects%2FbookTracker%2Findex.html;0;4
-FILE_NAME_1=4487;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fbugs%2FProjects%2FbookTracker%2Fsrc%2Flibrary.js;0;4
-FILE_NAME_2=424;CSS;0;EUTF-8;1;1;0;%2Fhome%2Fbugs%2FProjects%2FbookTracker%2Fstyle%2Flibrary.css;0;4
+FILE_NAME_1=3052;Javascript;0;EUTF-8;1;1;0;%2Fhome%2Fbugs%2FProjects%2FbookTracker%2Fsrc%2Flibrary.js;0;4
+FILE_NAME_2=757;CSS;0;EUTF-8;1;1;0;%2Fhome%2Fbugs%2FProjects%2FbookTracker%2Fstyle%2Flibrary.css;0;4
 
 [VTE]
 last_dir=/home/bugs/Projects/bookTracker/src

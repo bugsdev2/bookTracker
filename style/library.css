@@ -45,9 +45,9 @@
 
 .book-container {
 	display: flex;
-	justify-content: center;
-	align-items: center;
+	justify-content: space-evenly;
 	padding: 1rem;
+	align-items: center;
 	border-radius: 20px;
 	background: rgba(0,0,0,0.8);
 	border: 2px solid grey;
@@ -99,37 +99,12 @@
 	gap: 0.5rem;
 	flex-direction: column;
 	justify-content: space-around;
+	max-width: 9rem;
 }
 
-.page-status {
-	padding: 0.5rem;
-}
-
-/*
-.page-status .pages {
-	cursor: pointer;
-}
-*/
 
 .bookinfo .title {
 	font-weight: 600;
-}
-
-.book-container progress {
-	appearance: none;
-	margin-top: 0.5rem;
-	width: 100%;
-	grid-column: 1/-1;
-	height: 0.5rem;
-	border-radius: 30px;
-	background: black;
-}
-
-progress::-moz-progress-bar,
-progress::-webkit-progress-value,
-progress { 
-	background: #949494;
-	color: #949494;
 }
 
 .book-container .mini-form {
@@ -180,6 +155,7 @@ progress {
 	min-height: 7rem;
 	border-radius: 50%;
 	background: conic-gradient(teal 20%, 0, grey);
+	margin-left: 1rem;
 }
 
 .inner {

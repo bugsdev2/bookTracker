@@ -85,9 +85,9 @@ export const library = () => {
 			bookAuthor.classList.add('author');
 			bookAuthor.textContent = book.author;
 			bookInfo.appendChild(bookAuthor);
-		const pageStatus = document.createElement('div');
-			pageStatus.classList.add('page-status');
-			bookContainer.appendChild(pageStatus);
+		//~ const pageStatus = document.createElement('div');
+			//~ pageStatus.classList.add('page-status');
+			//~ bookContainer.appendChild(pageStatus);
 		//~ const pages = document.createElement('p');
 			//~ pages.classList.add('pages');
 			//~ pages.textContent = `${book.currentPage} / ${book.pages}`;
