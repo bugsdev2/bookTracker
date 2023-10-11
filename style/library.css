@@ -171,7 +171,7 @@
 	text-align: center;
 }
 
-.inner p:first-child {
+.inner p {
 	cursor: pointer;
 }
 

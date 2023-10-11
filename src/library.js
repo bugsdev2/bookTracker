@@ -62,7 +62,6 @@ export const library = () => {
 		myLibrary.forEach(book => {
 			book['index'] = myLibrary.indexOf(book);
 		});
-		console.log(myLibrary);
 	};
 	
 	// function to update library display
@@ -118,6 +117,7 @@ export const library = () => {
 			let percentage = convertToPercent(book.currentPage, book.pages);
 			progressBarOuter.style.setProperty('background', `conic-gradient(teal ${percentage}%, 0, grey)`);
 			percent.textContent = `${percentage}%`;
+			percent.classList.add('percent');
 			innermostDiv.appendChild(percent);
 			progressBarInner.appendChild(innermostDiv);
 			bookContainer.appendChild(progressBarOuter);
@@ -198,10 +198,9 @@ export const library = () => {
 	
 	// function to change current page and number of pages
 	function changePages(e) {
-		if (e.target.classList[0] == 'pages') {
+		if (e.target.classList[0] == 'pages' || e.target.classList[0] == 'percent') {
 			const container = e.target.parentElement.parentElement.parentElement.parentElement;
 			const index = container.getAttribute('data-index');
-			console.log(container, index);
 			const miniForm = document.createElement('div');
 				miniForm.classList.add('mini-form');
 				container.appendChild(miniForm);
