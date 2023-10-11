@@ -99,7 +99,8 @@
 	gap: 0.5rem;
 	flex-direction: column;
 	justify-content: space-around;
-	max-width: 9rem;
+	width: 9rem;
+	min-height: 8rem;
 }
 
 
@@ -155,7 +156,7 @@
 	min-height: 7rem;
 	border-radius: 50%;
 	background: conic-gradient(teal 20%, 0, grey);
-	margin-left: 1rem;
+	margin: 1rem;
 }
 
 .inner {
