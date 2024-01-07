@@ -19,21 +19,39 @@ export const library = () => {
 	let myLibrary = [];
 
 	// book constructor
-	function Book(title, author, currentPage, pages) {
-		this.title = title;
-		this.author = author;
-		this.currentPage = currentPage;
-		this.pages = pages;
-	}
+	//~ function Book(title, author, currentPage, pages) {
+		//~ this.title = title;
+		//~ this.author = author;
+		//~ this.currentPage = currentPage;
+		//~ this.pages = pages;
+	//~ }
 	
-	// prototype function to check readStatus
-	Book.prototype.readStatus = function(){
-		if (this.currentPage == this.pages) {
-			return 'Completed';
-		} else {
-			return Math.round((this.currentPage/this.pages)*100);
+	//~ // prototype function to check readStatus
+	//~ Book.prototype.readStatus = function(){
+		//~ if (this.currentPage == this.pages) {
+			//~ return 'Completed';
+		//~ } else {
+			//~ return Math.round((this.currentPage/this.pages)*100);
+		//~ }
+	//~ }
+	
+	// book class
+	class Book {
+		constructor(title, author, currentPage, pages){
+			this.title = title;
+			this.author = author;
+			this.currentPage = currentPage;
+			this.pages = pages;
 		}
-	}
+		
+		readStatus(){
+			if(this.currentPage === this.pages){
+				return 'Completed';
+			} else {
+				return Math.round((this.currentPage/this.pages)*100);
+			}
+		};
+	};
 	
 	// function to push books to myLibary array
 	function pushToLibrary(formData) {
