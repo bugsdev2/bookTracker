@@ -1,5 +1,14 @@
 export const library = () => {
 	
+	// setting up localStorage 
+	function getBooksFromStorage(){
+		return JSON.parse(localStorage.getItem("myLibrary"));
+	};
+	
+	function sendBookstoStorage(myLibrary){
+		localStorage.setItem("myLibrary", JSON.stringify(myLibrary));
+	};
+	
 	// library properties
 	const library = document.querySelector('.library');
 	const addBookBtn = document.querySelector('.addbtn');
@@ -16,7 +25,7 @@ export const library = () => {
 	const formInputPagesDiv = document.querySelector('form .pages');
 	
 	// creating library array to store books
-	let myLibrary = [];
+	let myLibrary = getBooksFromStorage() || [];
 
 	// book constructor
 	//~ function Book(title, author, currentPage, pages) {
@@ -62,11 +71,12 @@ export const library = () => {
 							formDataObj.current,
 							formDataObj.pages
 		);
-		if (newBook.title == '' || newBook.author == '' || newBook.currentPage == '' || newBook.pages == '') return;
-		if (newBook.currentPage > newBook.pages) return;
+		if (newBook.title == '' || newBook.author == '' || newBook.current == '' || newBook.pages == '') return;
+		if (newBook.current > newBook.pages) return;
 		newBook['status'] = newBook.readStatus();
 		myLibrary.push(newBook);
 		updateIndex(myLibrary);
+		sendBookstoStorage(myLibrary);
 		updateLibrary(newBook);
 	};
 	
@@ -150,8 +160,6 @@ export const library = () => {
 			bookContainer.classList.remove('done');
 			percent.textContent = `${percentage}%`;
 		}
-		
-		
 	};
 	
 	// getting form data from the form
@@ -187,8 +195,9 @@ export const library = () => {
 					let container = e.target.parentElement.parentElement;
 					myLibrary.splice(container.getAttribute('data-index'), 1);
 					updateIndex(myLibrary);
+					sendBookstoStorage(myLibrary);
 					clearLibrary();
-					myLibrary.forEach(book => {
+					myLibrary.map(book => {
 						updateLibrary(book);
 					});
 				}
@@ -262,6 +271,7 @@ export const library = () => {
 				myLibrary[index].currentPage = parseInt(formDataObj['current-page']);
 				myLibrary[index].pages = parseInt(formDataObj['pages']);
 				clearLibrary();
+				sendBookstoStorage(myLibrary);
 				myLibrary.forEach(book => {
 					updateLibrary(book);
 				});
@@ -289,18 +299,19 @@ export const library = () => {
 	booksWrapper.addEventListener('click', changePages);
 	
 	
-	// adding predefined book objects
-	const book1 = new Book('Persepolis', 'Marjane Satrapi', 240, 343, 'completed');
-	const book2 = new Book('The Sellout', 'Paul Beatty', 289, 289, 'completed');
-	const book3 = new Book('Things Fall Apart', 'Chinua Achebe', 132, 187, 'reading');
-	const book4 = new Book('Salvation of a Saint', 'Keigo Higashino', 204, 377, 'reading');
-	myLibrary.push(book1, book2, book3, book4);
-	updateIndex(myLibrary);
-	updateLibrary(book1);
-	updateLibrary(book2);
-	updateLibrary(book3);
-	updateLibrary(book4);
+	// adding predefined book objects -- this will remain commented out as this is just for demo purposes
+	//~ const book1 = new Book('Persepolis', 'Marjane Satrapi', 240, 343, 'completed');
+	//~ const book2 = new Book('The Sellout', 'Paul Beatty', 289, 289, 'completed');
+	//~ const book3 = new Book('Things Fall Apart', 'Chinua Achebe', 132, 187, 'reading');
+	//~ const book4 = new Book('Salvation of a Saint', 'Keigo Higashino', 204, 377, 'reading');
+	//~ myLibrary.push(book1, book2, book3, book4);
+	//~ sendBookstoStorage(myLibrary);
 	
+	if(getBooksFromStorage) {
+		getBooksFromStorage().map(book => {
+			updateLibrary(book);
+		});
+	}
 	
 }
 
